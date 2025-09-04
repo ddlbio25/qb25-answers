@@ -26,6 +26,7 @@ for ident, sequence in fa:
     contig_lengths.append(contig_length)
     total_length = total_length + contig_length
 
+
 mean_length = total_length / n_contigs
 
 contig_lengths.sort(reverse = True)
@@ -34,7 +35,7 @@ cumulative_length = 0
 for length in contig_lengths:
     cumulative_length = cumulative_length + length
     if cumulative_length > 0.5 * total_length:
-     break
+        break
 
 
 print(f"sequence length of shortest contig at 50% of the total assembly length is: {length} bases")

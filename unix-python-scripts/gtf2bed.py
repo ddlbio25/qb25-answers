@@ -15,6 +15,6 @@ for line in file:
     end = line[4]
     output = [chr, start, end, gene_name]
 
-    print("\t".join(output))
+    print("\t".join(output))    
 
 file.close()
