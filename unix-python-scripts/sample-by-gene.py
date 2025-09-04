@@ -58,5 +58,3 @@ file.close()
 
 # NOTE: first three tissues with expression > 0 
 # are brain-cortex, Adrenal Gland, and Thyroid
-# I used bash command:
-# python3 sample-by-gene.py | cut -f 2-3 | grep "^0" -v | head -n 3 
