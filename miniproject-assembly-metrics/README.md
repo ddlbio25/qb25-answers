@@ -30,5 +30,5 @@ Assembly CRPX506
     - 141Mb Aug 31  2023 caenorhabditis_remanei.PRJNA53967.WBPS19.genomic.fa
 
 - https://ftp.ebi.ac.uk/pub/databases/wormbase/parasite/releases/WBPS19/species/caenorhabditis_remanei/PRJNA577507/caenorhabditis_remanei.PRJNA577507.WBPS19.genomic.fa.gz
-    -127Mb Aug 31  2023 caenorhabditis_remanei.PRJNA577507.WBPS19.genomic.fa
+    - 127Mb Aug 31  2023 caenorhabditis_remanei.PRJNA577507.WBPS19.genomic.fa
 
