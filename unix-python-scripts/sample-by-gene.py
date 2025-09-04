@@ -19,6 +19,8 @@ file = open("GTEx_Analysis_v8_Annotations_SampleAttributesDS.txt")
 
 DDX11L1_expression = []
 counter = 0
+first_3_tissues = []
+
 for line in file:
     line = line.rstrip("\n").split("\t")
     if line[0] in DDX11L1.keys():
@@ -31,7 +33,7 @@ for line in file:
         DDX11L1_expression.append(new_line)
         
         if float(tpm) > 0 and counter < 3:
-            print(new_line)
+            first_3_tissues.append(smtsd)
             counter = counter + 1
         
         
@@ -48,9 +50,13 @@ for line in file:
 for line in DDX11L1_expression:
     print(line)
 
+# print the first three tissues that have above zero expression
+print("First three tissues with above zero expression are:\n", first_3_tissues)
     
 
 file.close()
 
 # NOTE: first three tissues with expression > 0 
 # are brain-cortex, Adrenal Gland, and Thyroid
+# I used bash command:
+# python3 sample-by-gene.py | cut -f 2-3 | grep "^0" -v | head -n 3 
