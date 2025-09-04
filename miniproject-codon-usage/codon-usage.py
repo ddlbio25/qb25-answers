@@ -49,3 +49,4 @@ for aa in aa_list:
     print(f"{aa}\t{count1}\t{count2}")
 
 file.close()
+file2.close()
