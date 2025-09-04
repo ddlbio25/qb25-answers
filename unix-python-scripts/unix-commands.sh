@@ -5,7 +5,7 @@ wc -l ce11_genes.bed
 # 53935 ce11genes.bed
 # 53935 features in this bed file
 
-#Question 1b, how many features per gene
+#Question 1b, how many features per chromosome
 sort ce11_genes.bed | cut -f 1 | uniq -c
 # 5460 chrI
 # 6299 chrII
@@ -31,11 +31,11 @@ grep RNA GTEx_Analysis_v8_Annotations_SampleAttributesDS.txt | wc -l
 #    20017
 
 #Question 3c
-grep -v RNA GTEx_Analysis_v8_Annotations_SampleAttributesDS.txt | wc -l
+    grep RNA -v GTEx_Analysis_v8_Annotations_SampleAttributesDS.txt | wc -l
 #     2935
 
 #Question 5a
-grep # -v ~/Data/References/hg38/gencode.v46.basic.annotation.gtf | cut -f 3 | sort | uniq -c
+grep \# -v ~/Data/References/hg38/gencode.v46.basic.annotation.gtf | cut -f 3 | sort | uniq -c
 # 664771 CDS
 # 865650 exon
 # 63086 gene
