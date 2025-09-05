@@ -1,0 +1,188 @@
+In this exercise, you will practice basic plotting with **`ggplot2`** on a dataset of median gene expression levels across samples from various human tissues from the GTEx Project. The dataset (`dt`) has one row per gene, with columns:
+
+-   `Name`: the Ensembl gene ID
+-   `Description`: the gene symbol
+-   One column per tissue containing the median expression levels (in TPM units)
+
+Insert your code into the empty code blocks. Insert answers any comprehension questions as comments within the code blocks. You do not need to submit the figures themselves, only the code used to produce them. Remember to label your axes!
+
+------------------------------------------------------------------------
+
+### Load data
+
+Start by loading the data into R, as before.
+
+```{r load-data}
+library(tidyverse)
+
+dt <- read_delim(
+"~/Data/GTEx/GTEx_Analysis_2017-06-05_v8_RNASeQCv1.1.9_gene_median_tpm.gct.gz", skip = 2, col_names = TRUE, delim = "\t"
+)
+```
+
+------------------------------------------------------------------------
+
+### Q1. Histogram
+
+Make a histogram of gene expression in the liver. Use the argument `breaks = seq(0, 100, 2)` to bin in units of 2 TPM, ranging from 0 to 100. Note that this cuts off the data at 100, which might be misleading depending on what we are trying to depict!
+
+What do you notice about the shape of the distribution? What does it tell you about the relative expression of genes in the liver transcriptome? Do you think this is specific to the liver? Check another tissue, as well.
+
+```{r q1}
+
+dt %>% 
+  select(Liver) %>% 
+  ggplot(aes(x = Liver)) +
+  geom_histogram(breaks = seq(0, 100, 2))
+
+dt %>% 
+  select(`Cells - EBV-transformed lymphocytes`) %>% 
+  ggplot(aes(x = `Cells - EBV-transformed lymphocytes`)) +
+  geom_histogram(breaks = seq(0, 100, 2))
+
+# answer here
+# I see a large number of genes with 0 or near 0 TPM with a very long right tail
+# I see the same type of distribution with LCLs
+# This tells me that in the liver and in LCLs, most genes are not expressed, or expressed at realtively low levels, with some genes having orders of magnitude higher expression
+
+```
+
+------------------------------------------------------------------------
+
+### Q2. Density plot
+
+Going back to the liver, now represent the same data with a density plot rather than a histogram. Do not restrict the X axis. Within the same code block, create a second plot where you scale the X axis to a log10 scale. Add a pseudo-count of 1 to the expression values, as the log of 0 is negative infinity.
+
+```{r q2}
+
+# answer here
+dt %>% 
+  select(Liver) %>% 
+  ggplot(aes(x = Liver)) +
+  geom_density()
+
+
+dt %>% 
+  select(Liver) %>% 
+  ggplot(aes(x = (Liver + 1))) +
+           geom_density() +
+  scale_x_log10()
+
+# Now you can see there are genes with expression close to 10k TPM
+```
+
+------------------------------------------------------------------------
+
+### Q3. Scatter plot
+
+Make a scatter plot comparing the expression genes in the `Liver` to the same genes in the `Heart - Left Ventricle`. Add a pseudocount to each and log10 scale both the X and Y axes. Adjust the point size to 1 and the alpha (opacity) to 0.2. Add a dashed red line along the diagonal (y = x).
+
+```{r q3}
+
+# answer here
+dt %>% 
+  select(Liver, `Heart - Left Ventricle`) %>% 
+  mutate(
+    across(
+      everything(),
+      \(x) x + 1
+    )
+  ) %>% 
+  ggplot(
+    aes(x = Liver, y = `Heart - Left Ventricle`)
+  ) +
+  geom_point(size = 1, alpha = 0.2) +
+  scale_x_log10() +
+  scale_y_log10()
+  
+  
+# now you see  good correlation between the two tissues, with high
+# dispersion between the tissues in genes that are lowly expressed in one or both tissues
+```
+
+------------------------------------------------------------------------
+
+### Q4. Colored points on scatter plot
+
+Color the previous scatter plot points based on whether the genes are mitochondrial vs nuclear encoded. Note that the tidyverse function `str_starts()` can test whether a string starts with a specific pattern.
+
+```{r q4}
+
+# answer here
+dt %>% 
+  select(Liver, `Heart - Left Ventricle`, Description) %>% 
+  mutate(
+    across(
+      !Description,
+      \(x) x + 1
+    )
+  ) %>% 
+  mutate(
+    is_mt = case_when(
+      str_starts(Description, r"(MT-)") ~ TRUE,
+      TRUE ~ FALSE
+    )
+  ) %>% 
+  ggplot(
+    aes(x = Liver, y = `Heart - Left Ventricle`, color = is_mt)
+  ) +
+  geom_point(size = 1, alpha = 0.2) +
+  scale_x_log10() +
+  scale_y_log10()
+
+# you see that the correlation of mitochonrdial gene expression between the two tissues
+# is pretty high.
+```
+
+------------------------------------------------------------------------
+
+### Q5. Facets
+
+Repeat question 1 (histogram), but faceting such that you create separate panels (arranged horizontally) for several tissues of interest:
+
+```{r}
+focal_tissues <- c("Liver", "Testis", "Whole Blood", "Heart - Left Ventricle", "Brain - Cortex")
+```
+
+This requires first converting the data into "long" format with `pivot_longer()`:
+
+```{r}
+
+# NOTE: I modified this code a bit
+dt_long <- dt %>%
+  mutate(
+    is_mitochondrial = case_when(
+      str_starts(Description, r"(MT-)") ~ TRUE,
+                 TRUE ~ FALSE)
+    ) %>% 
+  select("Description", "is_mitochondrial", all_of(focal_tissues)) %>%
+  pivot_longer(cols = focal_tissues, names_to = "Tissue", values_to = "TPM") 
+```
+
+After creating 5-panel plot, also split into two rows that separate genes that are versus are not encoded by the mitochondrial genome (10 panels). Use the argument `scales = "free_y"` to deal with the fact that there are far fewer mitochondrial-encoded than nuclear-encoded genes.
+
+```{r q5}
+
+# your code for 5-panel plot
+dt_long %>% 
+  ggplot(aes(x = TPM)) +
+  geom_histogram() +
+  facet_grid(. ~ Tissue )
+
+# your code for 10-panel plot
+dt_long %>% 
+  ggplot(aes(x = TPM)) +
+  geom_histogram() +
+  facet_grid(is_mitochondrial ~ Tissue, scales = "free_y")
+
+```
+
+------------------------------------------------------------------------
+
+Optional: Have fun and explore these data! Create your own plots and interpret them.
+
+```{r q5}
+
+# answer here
+
+```
