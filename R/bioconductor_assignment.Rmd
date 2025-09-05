@@ -74,8 +74,21 @@ When comparing gene or exon expression between samples, it is necessary to consi
 ```{r}
 counts_table <- assay(dxd)
 
+counts_vector <- c()
+for (i in 1:ncol(counts_table)) {
+  sum_counts <- sum(counts_table[, i])
+  counts_vector <- c(counts_vector, sum_counts)
+}
+colData(dxd)$read_count <- counts_vector
 
 # answer here
+colData(dxd) %>% 
+  as_tibble() %>% 
+  mutate(row_number = row_number()) %>% 
+  ggplot(aes(x = row_number, y = read_count)) +
+  geom_bar(stat = "identity") +
+  xlab("Sample in RNA seq") +
+  ylab("Read Count") 
 
 ```
 
@@ -89,6 +102,40 @@ counts_table <- assay(dxd)
 ```{r}
 
 # answer here
+metadata %>% as_tibble() %>%
+  mutate(sample_number = row_number()) %>% 
+  filter(sample %in% c("treated1fb", "untreated1fb") & exon == "this")
+# it's sample 1 and 4
+
+exon_treated1 <- sum(counts_table[, 1])
+exon_untreated1 <- sum(counts_table[, 4])
+
+# calculate CPM
+subset_counts <- counts_table[, c(1,4)]
+subset_counts[, 1] <- subset_counts[, 1] / exon_treated1
+subset_counts[, 2] <- subset_counts[, 2] / exon_untreated1
+
+# put into tibble
+subset_counts_df <- tibble(
+  treated1fb = subset_counts[,1],
+  untreated1fb = subset_counts[,2]
+) %>% 
+  mutate(
+    # multiply by 1e6
+    across(
+      everything(),
+      \(x) x * 10^6
+    )
+  )
+
+# make the graph
+subset_counts_df %>% 
+  ggplot(aes(x = treated1fb, y = untreated1fb)) +
+  geom_point() +
+  xlab("treated1fb CPM") +
+  ylab("untreated1fb CPM") +
+  geom_abline(slope = 1, lty = "dashed")
+
 
 ```
 
