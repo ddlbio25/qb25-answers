@@ -1,0 +1,31 @@
+```{r}
+library(tidyverse)
+
+```
+
+```{r}
+# Exercise 2
+
+df_hg19 <- read_tsv(
+  "hg19-kc-count.bed",
+  col_names = c("chr", "start", "end", "count")
+)
+df_hg16 <- read_tsv(
+  "hg16-kc-count.bed",
+  col_names = c("chr", "start", "end", "count")
+)
+
+df_combined <- bind_rows(
+  df_hg19,
+  df_hg16,
+  .id = "assembly"
+)
+
+df_combined %>% 
+  # assembly 1 is hg19
+  # assembly 2 is hg16
+  ggplot(aes(x = start, y = count, color = assembly)) +
+  geom_line() +
+  facet_wrap(. ~ chr, scales = "free") 
+ggsave("exercise2.png", exercise_2_plot)
+```
