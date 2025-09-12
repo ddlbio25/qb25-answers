@@ -23,7 +23,10 @@ dt <- read_delim("~/Data/GTEx/GTEx_Analysis_2017-06-05_v8_RNASeQCv1.1.9_gene_med
 # code and answer here
 dim(dt)
 # 56200 rows means 56200 genes (or features)
-# 56 columns means 56 tissues
+# 56 columns
+
+colnames(dt)
+# 56 columns - 2 columns for Name and Description means 54 tissues
 
 
 ```
