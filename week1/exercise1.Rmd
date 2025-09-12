@@ -1,0 +1,21 @@
+```{r}
+library(tidyverse)
+
+```
+
+```{r}
+# Exercise 1
+df_kc <- read_tsv(
+  "hg19-kc-count.bed",
+  col_names = c("chr", "start", "end", "count")
+)
+
+exercise_1_plot <- df_kc %>% 
+  ggplot((aes(x = start, y = count))) +
+  geom_line() +
+  facet_wrap(. ~ chr, scales = "free") 
+
+ggsave("exercise1.png", exercise_1_plot, scale = 2)
+
+
+```
