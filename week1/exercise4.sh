@@ -5,16 +5,16 @@ mv ~/Downloads/snps-chr1.bed .
 wc -l snps-chr1.bed
 
 # Question, find the gene on chr1 with the most snps
-bedtools intersect -wa -a hg19-kc.bed -b snps-chr1.bed -c | bedtools sort -chrThenScoreD | head -n 1
-# chr1	23037331	23247993	ENST00000374630.8_7	995
-# The gene above has the most snps, 995
+bedtools intersect -a hg19-kc.bed -b snps-chr1.bed -c | sort -t$'\t' -k5 -r -n | head -n 1
+# chr1	245912648	246670581	ENST00000490107.6_7	5445
+# The gene above has the most snps, 5445
 
 # Question, Describe the gene
-# GENCODE ID ENST00000374630.8_7
-# gene name EPHB2
-# position: hg19 chr1:23,037,331-23,247,993 CURRENTLY ZERO BASED AT START
-# size 210,662 bp
-# exon count 16
+# GENCODE ID ENST00000490107.6_7
+# gene name SMYD3
+# position: hg19 chr1:245,912,648-246,670,581 CURRENTLY ZERO BASED AT START
+# size 757,933 bp
+# exon count 12
 # this gene has the most SNPs because it has extremely long introns, where SNPs can appear without changing
 # the protein's coding sequence and (hopefully) without changing overall phenotype
 
