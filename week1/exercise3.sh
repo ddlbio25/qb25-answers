@@ -35,7 +35,7 @@ bedtools intersect -v -a nhek-active.bed -b nhlf-active.bed | wc -l
 # 12174 + 2405 = 14579 features
 # the two outputs do not add up to 14013
 
-# to restrict ton one feature per overlap, use -u flag
+# to restrict to one feature no matter how many overlaps, use -u flag
 bedtools intersect -u -wa -a nhek-active.bed -b nhlf-active.bed | wc -l
 # 11608
 # 11608 + 2405 = 14013 features in total in nhek-active.bed
