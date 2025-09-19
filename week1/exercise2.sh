@@ -8,7 +8,7 @@ grep -v _ hg16.chrom.sizes > hg16-main.chrom.sizes
 
 # make 1 Mb windows
 
-bedtools makewindows -g hg16_main.chrom.sizes -w 1000000 > hg16-1mb.bed
+bedtools makewindows -g hg16-main.chrom.sizes -w 1000000 > hg16-1mb.bed
 wc -l hg16-1mb.bed
 
 # create hg16-kc.bed with one transcript per gene

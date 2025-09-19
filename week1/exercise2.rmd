@@ -21,11 +21,11 @@ df_combined <- bind_rows(
   .id = "assembly"
 )
 
-df_combined %>% 
+exercise_2_plot <- df_combined %>% 
   # assembly 1 is hg19
   # assembly 2 is hg16
   ggplot(aes(x = start, y = count, color = assembly)) +
   geom_line() +
   facet_wrap(. ~ chr, scales = "free") 
-ggsave("exercise2.png", exercise_2_plot)
+ggsave("exercise2.png", exercise_2_plot, scale = 2)
 ```
