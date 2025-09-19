@@ -34,3 +34,4 @@ mismatches per aligned read	count
 17 1
 18 1
 22 1
+

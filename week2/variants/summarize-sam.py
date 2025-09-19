@@ -42,5 +42,5 @@ print("\n", end = "")
 print("mismatches per aligned read\tcount")
 for key in sorted(mismatch_count.keys()):
     print(key, mismatch_count[key])
-
+print()
 
