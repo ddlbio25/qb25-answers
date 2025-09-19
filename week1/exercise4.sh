@@ -12,7 +12,7 @@ bedtools intersect -a hg19-kc.bed -b snps-chr1.bed -c | sort -t$'\t' -k5 -r -n |
 # Question, Describe the gene
 # GENCODE ID ENST00000490107.6_7
 # gene name SMYD3
-# position: hg19 chr1:245,912,648-246,670,581 CURRENTLY ZERO BASED AT START
+# position: hg19 chr1:245,912,649-246,670,581 on UCSC genome browser
 # size 757,933 bp
 # exon count 12
 # this gene has the most SNPs because it has extremely long introns, where SNPs can appear without changing
