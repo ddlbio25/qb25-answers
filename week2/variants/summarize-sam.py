@@ -1,4 +1,4 @@
-#!/usr/bin/env/python3
+#!/usr/bin/env python3
 
 import sys
 path = sys.argv[1]
@@ -39,8 +39,8 @@ print("chr\talignments")
 for key in alignment_count.keys():
         print(key, alignment_count[key], sep = "\t")
 print("\n", end = "")
-print("mismatches per aligned read\tcount")
+print("mismatches in aligned read\tcount")
 for key in sorted(mismatch_count.keys()):
-    print(key, mismatch_count[key])
+    print(key, mismatch_count[key], sep = "\t")
 print()
 
