@@ -65,25 +65,24 @@ bedtools intersect -a nhek-active.bed -b nhlf-active.bed -F 1 -f 1 | head
 # Describe the chromatin state across all nine condition
 
 # Active in NHEK, Active in NHLF
-# -u for only one feature per overlap and -wa to avoid splitting up regions into different features
-bedtools intersect -a nhek-active.bed -b nhlf-active.bed -u -wa | head
+bedtools intersect -a nhek-active.bed -b nhlf-active.bed | head
 # look in genome browser at first feature
 # chromatin state across most tissues appears to be active promoters, with some regions
-# acting as enhancers or weak promoters in a few tissues
+# acting as strong enhancers in some tissues like HepG2
 
 # active in NHEK, repressed in NHLF
-bedtools intersect -a nhek-active.bed -b nhlf-repressed.bed -u -wa | head
+bedtools intersect -a nhek-active.bed -b nhlf-repressed.bed | head
 # look in genome browser at first feature
 # gene PRKCZ-DT
-# depending on tissue, chromatin is either an active promoter or is repressed,
-# with one tissue having a poised promoter
-# one tissue annotated as an enhancer
-# one having an insulator, etc.
+# depending on tissue, chromatin is either an active promoter(e.g. nhek) 
+# or is repressed (e.g. nhlf),
+# with HUVEC having a poised promoter
+# HepG2 annotated as an enhancer
+# K562 annotated as having an insulator, etc.
 
 # Repressed in NHEK, Repressed in NHLF
-bedtools intersect -a nhek-repressed.bed -b nhlf-repressed.bed -u -wa | head
+bedtools intersect -a nhek-repressed.bed -b nhlf-repressed.bed | head
 # look in genome browser at first feature
 # no gene appears to be annotated
-# chromatin across most tissues are either heterochromatic or are repressed
-# insulator or weak enhancer at far boundary
+# chromatin across all 9 tissues are either heterochromatic or are repressed
 
