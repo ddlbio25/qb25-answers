@@ -47,4 +47,4 @@ bedtools intersect -v -a hg16-kc.bed -b hg19-kc.bed | wc -l
 
 # Why are some genes in hg16 but not in hg19
 
-# these could have misannotated genes in hg16 that were corrected and removed for hg19
+# these could have been misannotated genes in hg16 that were corrected and removed for hg19
