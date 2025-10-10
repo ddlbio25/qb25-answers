@@ -1,0 +1,10 @@
+BYxRM_bam/A01_09.bam
+BYxRM_bam/A01_11.bam
+BYxRM_bam/A01_23.bam
+BYxRM_bam/A01_24.bam
+BYxRM_bam/A01_27.bam
+BYxRM_bam/A01_31.bam
+BYxRM_bam/A01_35.bam
+BYxRM_bam/A01_39.bam
+BYxRM_bam/A01_62.bam
+BYxRM_bam/A01_63.bam
