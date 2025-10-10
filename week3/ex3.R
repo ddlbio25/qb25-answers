@@ -51,6 +51,7 @@ genotypes_df %>%
     scales = "free_x",
     space = "free_x"
   ) +
+  labs(title = "Genotype across chrs and samples") +
   xlab("pos") +
   scale_x_continuous(labels = NULL, breaks = NULL)
 # ggsave(
