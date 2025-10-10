@@ -18,8 +18,7 @@ genotypes_df <- read_delim(
     "chr",
     "pos",
     "genotype"
-  ),
-  co
+  )
 )
 
 genotypes_df %>%
