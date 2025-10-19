@@ -1,0 +1,159 @@
+```{r}
+library(tidyverse)
+library(janitor)
+library(broom)
+```
+
+```{r}
+dnm_df <- read_csv(
+  "aau1043_dnm.csv"
+) %>% 
+  clean_names()
+
+#Step 1.2
+proband_summary <- dnm_df %>% 
+  filter(!is.na(phase_combined)) %>% 
+  group_by(proband_id, phase_combined) %>% 
+  summarize(
+    dnms = n()
+  ) %>% 
+  pivot_wider(
+    names_from = phase_combined,
+    values_from = dnms,
+    names_prefix = "dnm_count_"
+  )
+  
+  
+  proband_summary
+```
+
+```{r}
+parental_age_df <- read_csv("aau1043_parental_age.csv") %>% 
+  clean_names
+```
+
+```{r}
+dnm_parental_age <- proband_summary %>% 
+  inner_join(
+    parental_age_df,
+    by = join_by("proband_id" == "proband_id")
+  )
+
+
+```
+
+```{r}
+# Step 2.1 — Visualize relationships
+dnm_parental_age %>% 
+  ggplot(aes(x = mother_age, y = dnm_count_mother)) +
+  geom_point()
+ggsave("ex2_a.png")
+
+
+```
+
+```{r}
+dnm_parental_age %>% 
+  ggplot(aes(x = father_age, y = dnm_count_father)) +
+  geom_point()
+ggsave("ex2_b.png")
+```
+
+```{r}
+# Step 2.2 — OLS: maternal age vs. maternal DNMs
+maternal_lm <- lm(data = dnm_parental_age, formula = dnm_count_mother ~ 1 + mother_age)
+summary(maternal_lm)
+```
+
+```{r}
+# Step 2.3 — OLS: paternal age vs. paternal DNMs
+paternal_lm <- lm(data = dnm_parental_age, formula = dnm_count_father ~ 1 + father_age)
+summary(paternal_lm)
+```
+
+```{r}
+# Step 2.4 — Predict for a 50.5-year-old father
+dnm_count = 10.32632 + 1.35384 * 50.5
+dnm_count
+
+#paternal_lm$model
+```
+
+```{r}
+# Step 2.5 — Compare distributions of maternal vs. paternal DNMs
+
+# dnm_parental_age %>% 
+#   rename(
+#     father_dnmCount = dnm_count_father,
+#     mother_dnmCount = dnm_count_mother
+#   ) %>% 
+#   pivot_longer(
+#     !proband_id,
+#     names_to = c("parent", ".value"),
+#     names_sep = ("_")
+#   ) %>% 
+#   group_by(parent, age) %>% 
+#   summarise(
+#     mean_dnmCount = mean(dnmCount)
+#   ) %>% 
+#   ggplot(aes(x = age, y = mean_dnmCount, fill = parent)) +
+#   geom_col(alpha = 0.4, position = "identity")
+dnm_parental_age %>% 
+  rename(
+    father_dnmCount = dnm_count_father,
+    mother_dnmCount = dnm_count_mother
+  ) %>%
+  pivot_longer(
+    !proband_id,
+    names_to = c("parent", ".value"),
+    names_sep = ("_")
+  ) %>% 
+  ggplot(aes(x = dnmCount, fill = parent)) +
+  geom_histogram(position = "identity", alpha = 0.5, binwidth = 5) +
+  scale_x_continuous(breaks = seq(0, 130, 5))
+  
+
+ggsave("ex2_c.png")
+```
+
+```{r}
+# Step 2.6 — Statistical test: maternal vs. paternal DNMs per proband
+t.test(dnm_parental_age$dnm_count_father, dnm_parental_age$dnm_count_mother, paired = TRUE)
+
+```
+
+```{r}
+# STep 3:tidy datasets
+
+monsters <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2025/2025-05-27/monsters.csv')
+
+
+monsters_adjusted <- monsters %>% 
+  select(cr, ac, hp_number, speed_base_number) %>% 
+  rename(
+    armor_class = ac,
+    average_hp = hp_number,
+    walking_speed = speed_base_number,
+    challenge_rating = cr
+  )
+
+monsters_adjusted %>% 
+  pivot_longer(
+    !challenge_rating,
+    names_to = "monster_stat",
+    values_to = "value"
+  ) %>% 
+  ggplot(aes(x = value, y = challenge_rating, color = monster_stat)) +
+  geom_point() +
+  facet_grid(. ~ monster_stat, scales = "free") +
+  ylab(label = "challenge rating") +
+  xlab("monster_stat")
+ggsave("ex4_dnd_monster_cr.png")
+
+```
+
+```{r}
+lm(data = monsters_adjusted, formula = challenge_rating ~ 1 + armor_class + average_hp + walking_speed) %>% summary()
+
+
+```
