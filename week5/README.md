@@ -63,6 +63,17 @@ The relationship is significant because the p-value is less than
 as great as what was observed assuming the null hypothesis, that the
 true difference is actually zero, is true.
 
+Question 3, using lm().
+
+The coefficient for the intercept from
+
+lm(data = dnm_parental_age, formula = dnm_count_father -
+dnm_count_mother \~ 1) %\>% summary()
+
+is 39.2348. This is the average difference in paternal DNM counts vs
+maternal DNM counts, the same as in the t test. This means that the
+father's haplotype has about 39 more DNMs than the mother's haplotype.
+
 TIDY DATASETS:
 
 3.1)

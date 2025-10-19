@@ -119,6 +119,7 @@ ggsave("ex2_c.png")
 ```{r}
 # Step 2.6 — Statistical test: maternal vs. paternal DNMs per proband
 t.test(dnm_parental_age$dnm_count_father, dnm_parental_age$dnm_count_mother, paired = TRUE)
+lm(data = dnm_parental_age, formula = dnm_count_father - dnm_count_mother ~ 1) %>% summary()
 
 ```
 
