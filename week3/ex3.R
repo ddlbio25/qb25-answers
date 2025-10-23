@@ -45,7 +45,7 @@ genotypes_df %>%
     genotype = factor(genotype, c(0, 1))
   ) %>% 
   ggplot(aes(x = pos, y = sample, color = genotype, fill = genotype)) +
-  geom_tile() +
+  geom_point() +
   facet_grid(
     . ~ chr,
     scales = "free_x",
@@ -54,7 +54,7 @@ genotypes_df %>%
   labs(title = "Genotype across chrs and samples") +
   xlab("pos") +
   scale_x_continuous(labels = NULL, breaks = NULL)
-# ggsave(
-#   "allsamples_genomewide_COs.png"
-# )
+ggsave(
+   "allsamples_genomewide_COs.png"
+)
 
