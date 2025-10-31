@@ -1,0 +1,42 @@
+
+
+
+
+
+Analysis Type:	PANTHER Overrepresentation Test (Released 20240807)
+Annotation Version and Release Date:	GO Ontology database DOI:  10.5281/zenodo.16423886 Released 2025-07-22
+Analyzed List:	upload_1 (Drosophila melanogaster)
+Reference List:	Drosophila melanogaster (all genes in database)
+Test Type:	FISHER
+Correction:	FDR
+GO biological process complete	Drosophila melanogaster - REFLIST (13821)	upload_1 (49)	upload_1 (expected)	upload_1 (over/under)	upload_1 (fold Enrichment)	upload_1 (raw P-value)	upload_1 (FDR)
+vitelline membrane formation involved in chorion-containing eggshell formation (GO:0007305)	12	3	.04	+	70.52	9.01E-06	2.97E-03
+vitelline membrane formation (GO:0030704)	12	3	.04	+	70.52	9.01E-06	2.84E-03
+egg coat formation (GO:0035803)	12	3	.04	+	70.52	9.01E-06	2.72E-03
+chorion-containing eggshell formation (GO:0007304)	55	11	.19	+	56.41	3.56E-17	2.58E-13
+eggshell formation (GO:0030703)	58	11	.21	+	53.49	6.72E-17	2.43E-13
+regulation of oskar mRNA translation (GO:0046011)	16	3	.06	+	52.89	2.27E-05	6.33E-03
+extracellular matrix assembly (GO:0085029)	19	3	.07	+	44.54	3.90E-05	1.05E-02
+egg chorion assembly (GO:0007306)	86	5	.30	+	16.40	1.28E-05	3.70E-03
+cellular anatomical entity morphogenesis (GO:0032989)	148	8	.52	+	15.25	4.45E-08	2.48E-05
+cellular component assembly involved in morphogenesis (GO:0010927)	148	8	.52	+	15.25	4.45E-08	2.30E-05
+external encapsulating structure organization (GO:0045229)	149	8	.53	+	15.14	4.69E-08	2.27E-05
+follicle cell of egg chamber development (GO:0030707)	243	13	.86	+	15.09	1.67E-12	4.03E-09
+epithelial cell development (GO:0002064)	271	13	.96	+	13.53	6.65E-12	1.21E-08
+epithelial cell differentiation (GO:0030855)	327	13	1.16	+	11.21	7.01E-11	1.02E-07
+oogenesis (GO:0048477)	555	15	1.97	+	7.62	4.20E-10	5.08E-07
+female gamete generation (GO:0007292)	599	15	2.12	+	7.06	1.20E-09	1.25E-06
+epithelium development (GO:0060429)	563	14	2.00	+	7.01	5.34E-09	4.30E-06
+anatomical structure formation involved in morphogenesis (GO:0048646)	548	13	1.94	+	6.69	3.67E-08	2.42E-05
+organophosphate biosynthetic process (GO:0090407)	297	7	1.05	+	6.65	7.81E-05	2.02E-02
+germ cell development (GO:0007281)	696	15	2.47	+	6.08	9.30E-09	6.74E-06
+cellular process involved in reproduction in multicellular organism (GO:0022412)	756	16	2.68	+	5.97	3.36E-09	3.05E-06
+tissue development (GO:0009888)	663	14	2.35	+	5.96	4.22E-08	2.55E-05
+developmental process involved in reproduction (GO:0003006)	935	16	3.31	+	4.83	6.80E-08	3.08E-05
+gamete generation (GO:0007276)	893	15	3.17	+	4.74	2.51E-07	1.07E-04
+sexual reproduction (GO:0019953)	1060	15	3.76	+	3.99	2.22E-06	8.49E-04
+multicellular organismal reproductive process (GO:0048609)	1226	17	4.35	+	3.91	4.88E-07	1.97E-04
+cell development (GO:0048468)	1339	16	4.75	+	3.37	8.35E-06	2.88E-03
+reproductive process (GO:0022414)	1450	17	5.14	+	3.31	5.05E-06	1.83E-03
+cell differentiation (GO:0030154)	1675	16	5.94	+	2.69	1.34E-04	3.34E-02
+cellular developmental process (GO:0048869)	1676	16	5.94	+	2.69	1.35E-04	3.25E-02
