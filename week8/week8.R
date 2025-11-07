@@ -92,10 +92,14 @@ m2 %>%
 # with a p value of 0.0257, allowing us to reject the null hypothesis that the 
 # beta coefficent is zero and conclude that there is indeed male biased expression of SLC25A47
 
+# Step 2.2
+
 dds <- DESeq(
   object = dds
 )
 
+
+# Step 2.3
 res <- results(
   dds,
   name = "SEX_male_vs_female"
